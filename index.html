@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./styles/style.css"/>
+        <script type="text/javascript" src="./lib/jquery.js"></script>
+        <script type="text/javascript" src="./lib/socket.io.js"></script>
+       
+        <script>
+            $(document).on("ready", function () {
+
+                var socket = io('http://localhost:2000');
+
+                $(".send-btn").off().on("click", function () {
+                    if ($(this).prev(".input-tag").val()) {
+                        var msgText = $(this).prev(".input-tag").val();
+                        if ($(this).prev(".input-tag").hasClass("chatOneInput")) {
+                            socket.emit('JohnMsg', msgText);
+                        } else {
+                            socket.emit('MarshMsg', msgText);
+                        }
+                    }
+                });
+                
+                var displayMsgHtml;
+                
+                displayMsgHtml = function (data, toUser, fromUser) {
+                    //To user UI
+                    toUser.find(".display-msg").append("<div><p>" + data.name + "</p><p>" + data.msg + "</p></div></br>");
+                    //From user UI
+                    fromUser.find(".input-tag").val('');
+                    fromUser.find(".display-msg").append("<div class='gray-color'><p>You </p><p>" + data.msg + "</p></div></br>");    
+                };
+                
+                socket.on('John', function (data) {
+                    displayMsgHtml(data, $(".chat2"), $(".chat1")); //Message to MARSH(chat2) from JOHN(chat1)
+                });
+
+                socket.on('Marsh', function (data) {
+                    displayMsgHtml(data, $(".chat1"), $(".chat2")); //Message to JOHN(chat1) from MARSH(chat2)
+                });
+
+            });
+        </script>
+    </head>
+   
+    <body>
+       <div class="main-layout">
+           
+                <header>Chat</header>
+                <div class="chat1">
+                    <header>Person 1(John)</header>
+
+                    <div class="display-msg"></div>
+
+                    <input type="text" placeholder="Enter your message" class="input-tag chatOneInput"/>
+                    <button class="send-btn">Send</button>
+                </div>
+                
+                <div class="chat2">
+                    <header>Person 2(Marsh)</header>
+
+                    <div class="display-msg"></div>
+
+                    <input type="text" placeholder="Enter your message" class="input-tag chatTwoInput"/>
+                    <button class="send-btn">Send</button>
+                </div>
+           
+       </div>
+    </body>
+	 
+</html>

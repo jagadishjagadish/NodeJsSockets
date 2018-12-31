@@ -1,0 +1,60 @@
+.main-layout {
+    width: 70%;
+    margin: auto;
+    margin-top: 7%;
+}
+.main-layout header {
+    margin-bottom: 15px;
+    color: brown;
+    font-size: 20px;
+}
+.display-msg div{
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 9px;
+    background-color: sandybrown;
+    width: auto;
+    float: left;
+    padding: 3px 4px 3px;
+    min-width: 40%;
+    clear: both;
+}
+.display-msg div p {
+    margin: 0px;
+}
+.display-msg div p:first-child {
+    font-size: 11px;
+    color: darkred;
+}
+.gray-color {
+    background-color: beige !important;
+    float: right !important;
+}
+.display-msg {
+    width: 100%;
+    height: 216px;
+    overflow-y: auto;
+}
+.input-tag {
+    width: 72%;
+    height: 25px;
+    font-size: 12px;
+}
+.chat1, .chat2 {
+    min-width: 31%;
+    float: left;
+    border: 1px solid lightgray;
+    padding: 24px;
+    box-sizing: border-box;
+    background-color: lightgoldenrodyellow;
+    margin-right: 3%;
+}
+.send-btn {
+    width:23%;
+    padding: 6px;
+    background-color: lightsalmon;
+    color: whitesmoke;
+}
+.send-btn:focus {
+    outline: none;
+}
